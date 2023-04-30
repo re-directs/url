@@ -3,8 +3,10 @@
 <head>
 	<title>Redirect Page</title>
 	<script type="text/javascript">
+        		const urlParams = new URLSearchParams(window.location.search);
+		const nurl = urlParams.get('url');
 		function redirectTo() {
-			window.location.href = "https://www.mediamarkt.nl/nl/product/_oral-b-io-ultimate-clean-opzetborstel-wit-4-stuks-1667822.html?ga_query=4210201301677&enforcedReload=true";
+			window.location.href = nurl;
 		}
 	</script>
 </head>
