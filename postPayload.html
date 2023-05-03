@@ -6,10 +6,18 @@
 <body>
 	<script type="text/javascript">
 		const urlParams = new URLSearchParams(window.location.search);
-		const url = decodeURIComponent(urlParams.get('url'));
+
+
+		const url = urlParams.get('url');
+        const encodedUrl = url.replace(/%20/g, '_');
+		const decodedUrl = decodeURIComponent(encodedUrl);
+        const finalUrl = decodedUrl.replace(/_/g, '%20');
+
+
+		
 		const urlPayload = urlParams.get('urlPayload');
 		console.log(urlPayload);
-		console.log(url);
+		console.log(finalUrl);
 		// const payload = urlPayload.JSON.stringify({
 		// 	title: 'My post title',
 		// 	body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -18,7 +26,7 @@
 		
 		function sendPostRequest() {
 			const xhr = new XMLHttpRequest();
-			xhr.open('POST', url, true);
+			xhr.open('POST', finalUrl, true);
 			xhr.setRequestHeader('Content-type', 'application/json');
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState === XMLHttpRequest.DONE) {
