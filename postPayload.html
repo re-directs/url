@@ -8,17 +8,17 @@
 		const urlParams = new URLSearchParams(window.location.search);
 
 
-		const url = urlParams.get('url');
-        const encodedUrl = url.replace(/%20/g, '_');
-		const decodedUrl = decodeURIComponent(encodedUrl);
-		const finalUrl = decodedUrl.replace(/\s/g, '');
-		const finalUrld = decodedUrl.replace(/_/g, '%20');
-		const finalUrldd = finalUrld.replace(/\s/g, '');
+		const Url = urlParams.get('url');
+        // const encodedUrl = url.replace(/%20/g, '_');
+		// const decodedUrl = decodeURIComponent(encodedUrl);
+		// const finalUrl = decodedUrl.replace(/\s/g, '');
+		// const finalUrld = decodedUrl.replace(/_/g, '%20');
+		// const finalUrldd = finalUrld.replace(/\s/g, '');
 
 		
 		const urlPayload = urlParams.get('urlPayload');
 		console.log(urlPayload);
-		console.log(finalUrldd);
+		console.log(Url);
 		// const payload = urlPayload.JSON.stringify({
 		// 	title: 'My post title',
 		// 	body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -27,7 +27,7 @@
 		
 		function sendPostRequest() {
 			const xhr = new XMLHttpRequest();
-			xhr.open('POST', finalUrldd, true);
+			xhr.open('POST', Url, true);
 			xhr.setRequestHeader('Content-type', 'application/json');
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState === XMLHttpRequest.DONE) {
