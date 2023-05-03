@@ -11,8 +11,8 @@
 		const url = urlParams.get('url');
         const encodedUrl = url.replace(/%20/g, '_');
 		const decodedUrl = decodeURIComponent(encodedUrl);
-		const finalUrld = finalUrl.replace(/\s/g, '');
-		const finalUrl = decodedUrl.replace(/_/g, '%20');
+		const finalUrl = decodedUrl.replace(/\s/g, '');
+		const finalUrld = decodedUrl.replace(/_/g, '%20');
 		
 
 		
