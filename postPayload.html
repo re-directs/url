@@ -12,11 +12,12 @@
         const encodedUrl = url.replace(/%20/g, '_');
 		const decodedUrl = decodeURIComponent(encodedUrl);
 		const finalUrl = decodedUrl.replace(/_/g, '%20').trim();
+		const finalUrld = finalUrl.replace(/\s/g, '');
 
 		
 		const urlPayload = urlParams.get('urlPayload');
 		console.log(urlPayload);
-		console.log(finalUrl);
+		console.log(finalUrld);
 		// const payload = urlPayload.JSON.stringify({
 		// 	title: 'My post title',
 		// 	body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -25,7 +26,7 @@
 		
 		function sendPostRequest() {
 			const xhr = new XMLHttpRequest();
-			xhr.open('POST', finalUrl, true);
+			xhr.open('POST', finalUrld, true);
 			xhr.setRequestHeader('Content-type', 'application/json');
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState === XMLHttpRequest.DONE) {
