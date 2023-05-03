@@ -5,8 +5,11 @@
 </head>
 <body>
 	<script type="text/javascript">
-		const url = 'https://jsonplaceholder.typicode.com/posts';
-		const payload = JSON.stringify({
+		const urlParams = new URLSearchParams(window.location.search);
+		const url = urlParams.get('url');
+		const urlPayload = urlParams.get('urlPayload');
+
+		const payload = urlPayload.JSON.stringify({
 			title: 'My post title',
 			body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 			userId: 1
