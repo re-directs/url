@@ -10,11 +10,11 @@
 		const urlPayload = urlParams.get('urlPayload');
 		console.log(urlPayload);
 		console.log(url);
-		const payload = urlPayload.JSON.stringify({
-			title: 'My post title',
-			body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-			userId: 1
-		});
+		// const payload = urlPayload.JSON.stringify({
+		// 	title: 'My post title',
+		// 	body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+		// 	userId: 1
+		// });
 		
 		function sendPostRequest() {
 			const xhr = new XMLHttpRequest();
@@ -30,7 +30,7 @@
 					}
 				}
 			};
-			xhr.send(payload);
+			xhr.send(urlPayload);
 		}
 	</script>
 	<h1>Example POST Request</h1>
