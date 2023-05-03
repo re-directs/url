@@ -8,7 +8,8 @@
 		const urlParams = new URLSearchParams(window.location.search);
 		const url = decodeURIComponent(urlParams.get('url'));
 		const urlPayload = urlParams.get('urlPayload');
-
+		console.log(urlPayload);
+		console.log(url);
 		const payload = urlPayload.JSON.stringify({
 			title: 'My post title',
 			body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
