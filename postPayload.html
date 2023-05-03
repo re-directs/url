@@ -4,7 +4,7 @@
 	<title>Post Request Page</title>
 	<script type="text/javascript">
 		const urlParams = new URLSearchParams(window.location.search);
-		const url = urlParams.get('url');
+		const url = decodeURIComponent(urlParams.get('url'));
 		const payload = urlParams.get('payload');
 		
 		function sendPostRequest() {
