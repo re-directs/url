@@ -1,49 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Example POST Request</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
-	<script type="text/javascript">
-		const urlParams = new URLSearchParams(window.location.search);
+    <div id="response"></div>
+    <script type="text/javascript">
+        const urlParams = new URLSearchParams(window.location.search);
 
+        const Url = urlParams.get('url');
+        const finalUrl = Url.replace(/\s/g, '%20').replace(/;/g, '%3B').replace('%26', '&');
+        console.log(finalUrl);
 
-		const Url = urlParams.get('url');
-        // const encodedUrl = url.replace(/%20/g, '_');
-		// const decodedUrl = decodeURIComponent(encodedUrl);
-		// const finalUrl = decodedUrl.replace(/\s/g, '');
-		// const finalUrld = decodedUrl.replace(/_/g, '%20');
-		// const finalUrldd = finalUrld.replace(/\s/g, '');
+        const urlPayload = urlParams.get('urlPayload');
 
-		
-		const urlPayload = urlParams.get('urlPayload');
-		console.log(urlPayload);
-		console.log(Url);
-		// const payload = urlPayload.JSON.stringify({
-		// 	title: 'My post title',
-		// 	body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-		// 	userId: 1
-		// });
-		
-		function sendPostRequest() {
-			const xhr = new XMLHttpRequest();
-			xhr.open('POST', Url, true);
-			xhr.setRequestHeader('Content-type', 'application/json');
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState === XMLHttpRequest.DONE) {
-					if (xhr.status === 201) {
-						const iframe = document.getElementById('myIframe');
-						iframe.contentDocument.write(xhr.responseText);
-					} else {
-						console.error('Error:', xhr.status);
-					}
-				}
-			};
-			xhr.send(urlPayload);
-		}
-	</script>
-	<h1>Example POST Request</h1>
-	<button onclick="sendPostRequest()">Send POST Request</button>
-	<iframe id="myIframe" width="100%" height="500"></iframe>
+        const jsonString = urlPayload;
+
+        const json = JSON.parse(jsonString);
+        const params = json.requests[0].params;
+        const fixedParams = params.replace(/%26/g, '&');
+        json.requests[0].params = fixedParams;
+
+        const fixedJsonString = JSON.stringify(json);
+        console.log(fixedJsonString);
+
+        function sendPostRequest() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', finalUrl, true);
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const responseDiv = document.getElementById('response');
+                        responseDiv.innerHTML = xhr.responseText;
+                    } else {
+                        console.error('Error:', xhr.status);
+                    }
+                }
+            };
+            xhr.send(fixedJsonString);
+        }
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+            sendPostRequest();
+        };
+    </script>
 </body>
 </html>
